@@ -12,7 +12,7 @@ public class MoveWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerT = GameObject.Find("Player").transform;
+        playerT = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
         rb.AddForce(playerT.forward * projectileSpeed, ForceMode.Impulse);
         Destroy(gameObject, 3f);

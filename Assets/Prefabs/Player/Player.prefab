@@ -784,6 +784,7 @@ GameObject:
   - component: {fileID: 4900831802964351277}
   - component: {fileID: 4900330661257957929}
   - component: {fileID: 4970632048451986734}
+  - component: {fileID: 1061905519841998151}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -909,6 +910,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4807f0533e3624408724fdf841e6e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1061905519841998151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012982807848244943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 5015862012848971699}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &5013162968469021691
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  canRun: 1
+  canRun: 0
   runSpeed: 9
   runningKey: 304
 --- !u!114 &4900724558000211871
@@ -1041,7 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f297b79691c9f4a418f02d550966744d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPF: {fileID: 7073510158525564148, guid: b893d46e94700da44bbce9950ca025f0, type: 3}
+  weaponPF: {fileID: 3218865490866222244, guid: cd3aa4e67a054e54786441dfd7a27720, type: 3}
 --- !u!1 &5013658884073983660
 GameObject:
   m_ObjectHideFlags: 0
