@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour
     public Transform playerSpawnT;
     private Camera playerCamera;
     private GameObject playerGO;
-
     private void Awake()
     {
         SpawnPlayer();
