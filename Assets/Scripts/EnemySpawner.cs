@@ -21,6 +21,8 @@ public class EnemySpawner : MonoBehaviour
     private float timer;
     private int currentEnemies;
 
+    private float spawnHeight = 0.5f;
+
 
 
     // Start is called before the first frame update
@@ -45,14 +47,14 @@ public class EnemySpawner : MonoBehaviour
             {
                 do
                 {
-                    spawnPosition = transform.position + new Vector3(Random.Range(-spawnAreaSize.x / 2f, spawnAreaSize.x / 2f), 0.5f, Random.Range(-spawnAreaSize.z / 2f, spawnAreaSize.z / 2f));
+                    spawnPosition = transform.position + new Vector3(Random.Range(-spawnAreaSize.x / 2f, spawnAreaSize.x / 2f), spawnHeight, Random.Range(-spawnAreaSize.z / 2f, spawnAreaSize.z / 2f));
                 } while (Vector3.Distance(spawnPosition, playerTransform.position) < minDistanceFromPlayer);
 
                 GameObject spawnPrefab = spawnPrefabs[Random.Range(0, spawnPrefabs.Length)];
                 Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
                 //currentEnemies++;
 
-                print("Num Ememies = " + currentEnemies);
+                //print("Num Ememies = " + currentEnemies);
                 timer = spawnInterval;
             }
         }

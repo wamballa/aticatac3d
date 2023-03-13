@@ -19,15 +19,20 @@ public class WitchMovement : MonoBehaviour
 
     private bool canMove = false;
 
+    private EnemyController enemyController;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
+        enemyController = gameObject.GetComponent<EnemyController>();
+        if (enemyController == null) print("ERROR: cannot find enemy controller");
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetCanMove();
         if (hasFoundPlayer)
         {
             if (canMove)
@@ -45,28 +50,10 @@ public class WitchMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Trigger entered with " + other.name + "by object called "+transform.name);
-
         if (other.CompareTag("Environment"))
         {
             FlipObject();
         }
-
-        if (other.CompareTag("Player"))
-        {
-            print("Hit Player");
-        }
-
-        if (other.CompareTag("Weapon"))
-        {
-            print("Hit Player");
-            GameObject pop = Instantiate(popPF, transform.position, Quaternion.identity);
-            Destroy(pop, 1f);
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-
-        }
-
     }
 
     public void SetCanMove( bool b)
@@ -96,6 +83,11 @@ public class WitchMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // unflip the object
         }
+    }
+
+    private void GetCanMove()
+    {
+        canMove = enemyController.GetCanMove();
     }
 
 }

@@ -15,7 +15,7 @@ public class MoveWeapon : MonoBehaviour
         playerT = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
         rb.AddForce(playerT.forward * projectileSpeed, ForceMode.Impulse);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 2f);
         initialY = transform.position.y;
     }
 
