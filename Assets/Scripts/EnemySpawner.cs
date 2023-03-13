@@ -36,6 +36,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         if (spawnPrefabs.Length == 0) return;
+        currentEnemies = CountEnemies();
         if (currentEnemies < maxEnemies)
         {
             timer -= Time.deltaTime;
@@ -49,9 +50,17 @@ public class EnemySpawner : MonoBehaviour
 
                 GameObject spawnPrefab = spawnPrefabs[Random.Range(0, spawnPrefabs.Length)];
                 Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
-                currentEnemies++;
+                //currentEnemies++;
+
+                print("Num Ememies = " + currentEnemies);
                 timer = spawnInterval;
             }
         }
+    }
+
+    int CountEnemies()
+    {
+        int n = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        return n;
     }
 }

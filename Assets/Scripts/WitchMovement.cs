@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WitchMovement : MonoBehaviour
 {
-    int direction = -1;
+    public GameObject popPF;
+
+    int direction = 1;
     float speed = 1;
     float approachStep = 0.05f;
     float approachSpeed = 1f;
@@ -54,7 +56,17 @@ public class WitchMovement : MonoBehaviour
         {
             print("Hit Player");
         }
-        
+
+        if (other.CompareTag("Weapon"))
+        {
+            print("Hit Player");
+            GameObject pop = Instantiate(popPF, transform.position, Quaternion.identity);
+            Destroy(pop, 1f);
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+
+        }
+
     }
 
     public void SetCanMove( bool b)

@@ -1,53 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpiderMovement : MonoBehaviour
 {
-    public Transform target;
-    public float speed = 2f;
-    public float pauseTime = 1f;
+    public float speed = 5f; // The speed of the object's circular motion
+    public float radius = 2f; // The radius of the circle
+    public float height = 0f; // The height of the object
+    private Vector3 center; // The center of the circle
 
+    private bool canMove;
 
-
+    // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        target = transform;
-        if (target == null) print("ERROR: no player found"); else StartCoroutine(MoveSpider());
+        center = transform.position; // Get the starting position of the object
     }
 
-    private IEnumerator MoveSpider()
+    // Update is called once per frame
+    void Update()
     {
-        while (true)
-        {
-            // Move towards the target
-            float distance = Vector3.Distance(transform.position, target.position);
-            float journeyTime = distance / speed;
-            float startTime = Time.time;
-            while (Time.time < startTime + journeyTime)
-            {
-                float fraction = (Time.time - startTime) / journeyTime;
-                transform.position = Vector3.Lerp(transform.position, target.position, fraction);
-                yield return null;
-            }
+        if (!canMove) return;
+        // Calculate the new position of the object using circular motion
+        float angle = Time.time * speed; // Calculate the angle based on time and speed
+        float x = Mathf.Cos(angle) * radius + center.x; // Calculate the x position of the object
+        float z = Mathf.Sin(angle) * radius + center.z; // Calculate the z position of the object
+        transform.position = new Vector3(x, height, z); // Set the position of the object
+    }
 
-            // Pause at the target position
-            yield return new WaitForSeconds(pauseTime);
-
-            // Move back to the starting position
-            distance = Vector3.Distance(transform.position, transform.parent.position);
-            journeyTime = distance / speed;
-            startTime = Time.time;
-            while (Time.time < startTime + journeyTime)
-            {
-                float fraction = (Time.time - startTime) / journeyTime;
-                transform.position = Vector3.Lerp(transform.position, transform.parent.position, fraction);
-                yield return null;
-            }
-
-            // Pause at the starting position
-            yield return new WaitForSeconds(pauseTime);
-        }
+    public void SetCanMove(bool b) 
+    {
+        canMove = b;
     }
 }
