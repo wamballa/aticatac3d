@@ -7,8 +7,9 @@ public class NormalDoorController : MonoBehaviour
     public GameObject openDoor;
     public GameObject closedDoor;
     public bool isTimedDoor;
+    public Transform newLocation;
 
-    float timerDelay = 8f;
+    float timerDelay = 2f;
     bool isDoorOpen = false;
 
     private void Awake()
@@ -22,6 +23,20 @@ public class NormalDoorController : MonoBehaviour
         if (isTimedDoor)
         {
             StartCoroutine(HandleTimedDoors());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (isDoorOpen)
+            {
+                // Play Sound
+                other.transform.position = newLocation.position;
+                other.transform.rotation = newLocation.rotation;
+            }
+
         }
     }
 
