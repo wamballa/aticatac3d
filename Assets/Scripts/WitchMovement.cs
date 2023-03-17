@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WitchMovement : MonoBehaviour
 {
-    public GameObject popPF;
+    //public GameObject popPF;
 
     int direction = 1;
     float speed = 1;
@@ -52,9 +52,11 @@ public class WitchMovement : MonoBehaviour
     {
         if (other.CompareTag("Environment"))
         {
+            //print("Witch hit wall");
             FlipObject();
         }
     }
+
 
     public void SetCanMove( bool b)
     {

@@ -27,7 +27,7 @@ public class SpiderMovement : MonoBehaviour
     {
         GetCanMove();
         if (!canMove) return;
-        print("Height = " + height);
+        //print("Height = " + height);
         // Calculate the new position of the object using circular motion
         float angle = (direction * Time.time) * speed; // Calculate the angle based on time and speed
         float x = Mathf.Cos(angle) * radius + center.x; // Calculate the x position of the object

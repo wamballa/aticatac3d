@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     public void Start()
     {
         audioSource = transform.GetComponent<AudioSource>();
-        if (audioSource == null) print("ERROR: no audio source on enemy");
+        //if (audioSource == null) print("ERROR: no audio source on enemy");
         canMove = false;
         sphereCollider = transform.GetComponent<SphereCollider>(); // Get sphere collider
         if (sphereCollider == null) print("ERROR: no sphere collider found");

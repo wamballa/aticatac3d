@@ -5,7 +5,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
 
-    public GameObject[] spawnPrefabs;
+    public GameObject[] prefabsToSpawn;
+
+    public GameObject[] spawnAreas;
+
     public Transform spawnAreaTransform;
     public int maxEnemies = 1;
     public float spawnInterval = 1f;
@@ -21,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     private float timer;
     private int currentEnemies;
 
-    private float spawnHeight = 0.5f;
+    private float spawnHeight = -0.5f;
 
 
 
@@ -32,13 +35,20 @@ public class EnemySpawner : MonoBehaviour
         currentEnemies = 0;
         spawnAreaSize = spawnAreaTransform.localScale;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        spawnAreas = GameObject.FindGameObjectsWithTag("SpawnArea");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawnPrefabs.Length == 0) return;
+        if (prefabsToSpawn.Length == 0) return;
         currentEnemies = CountEnemies();
+
+
+        spawnAreaTransform = GetCurrentSpawnAreaTransform();
+        spawnAreaSize = spawnAreaTransform.localScale;
+
         if (currentEnemies < maxEnemies)
         {
             timer -= Time.deltaTime;
@@ -47,10 +57,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 do
                 {
-                    spawnPosition = transform.position + new Vector3(Random.Range(-spawnAreaSize.x / 2f, spawnAreaSize.x / 2f), spawnHeight, Random.Range(-spawnAreaSize.z / 2f, spawnAreaSize.z / 2f));
+                    spawnPosition = spawnAreaTransform.position + new Vector3(Random.Range(-spawnAreaSize.x / 2f, spawnAreaSize.x / 2f), spawnHeight, Random.Range(-spawnAreaSize.z / 2f, spawnAreaSize.z / 2f));
                 } while (Vector3.Distance(spawnPosition, playerTransform.position) < minDistanceFromPlayer);
 
-                GameObject spawnPrefab = spawnPrefabs[Random.Range(0, spawnPrefabs.Length)];
+                GameObject spawnPrefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
                 Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
                 //currentEnemies++;
 
@@ -59,6 +69,13 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+
+    Transform GetCurrentSpawnAreaTransform()
+    {
+        return playerTransform.GetComponent<PlayerCollisions>().GetCurrentSpawnAreaTransform();
+    }
+    
+
 
     int CountEnemies()
     {
