@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryPanelController : MonoBehaviour
 {
+    // Event manager
+    private EventManager eventManager;
 
     //GameObject[] items;
     List<GameObject> items;
@@ -16,19 +19,23 @@ public class InventoryPanelController : MonoBehaviour
     public GameObject bankKeyImage;
 
     // playercontroller to trigger drop pickup
-    private PlayerController playerController;
+    //private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
+        // find event manager
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+
         items = new List<GameObject>();
+
         // Add nulls to list
         for (int i=0; i < numItems; i++)
         {
             items.Add(null);
         }
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        if (playerController == null) print("ERROR: cannot find player controller");
+        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //if (playerController == null) print("ERROR: cannot find player controller");
     }
 
     // Update is called once per frame
@@ -86,9 +93,7 @@ public class InventoryPanelController : MonoBehaviour
         switch (item)
         {
             case "CyanKey":
-
                 InsertAt(blankPosition, cyanKeyImage);
-                //items.Insert(blankPosition, cyanKeyImage);
                 break;
             case "GreenKey":
                 InsertAt(blankPosition, greenKeyImage);
@@ -105,7 +110,9 @@ public class InventoryPanelController : MonoBehaviour
 
     public void RemoveItem(int i)
     {
-        playerController.DropPickup(items[i].tag);
+        if (items[i] == null) return;
+        eventManager.onDropPickup.Invoke(items[i].tag);        
+
         items[i] = null;
         RefreshPanel();
     }

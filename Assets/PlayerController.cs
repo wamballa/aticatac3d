@@ -7,12 +7,21 @@ public class PlayerController : MonoBehaviour
     bool hasGreenKey;
     bool hasCyanKey;
 
+    // Event listener
+    public EventManager eventManager;
+
     // pickups
     public GameObject[] pickUps;
 
     void Start()
     {
-        
+        //eventManager.onDropPickup.AddListener(DropPickup);
+    }
+
+    private void OnEnable()
+    {
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+        eventManager.onDropPickup.AddListener(DropPickup);
     }
 
     // Update is called once per frame
