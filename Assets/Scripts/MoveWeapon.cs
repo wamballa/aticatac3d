@@ -9,10 +9,21 @@ public class MoveWeapon : MonoBehaviour
     private float bulletForce = 6f;
     private Transform spawnPointTransform;
 
+    public AudioClip bounceClip;
+
     private void Start()
     {
+        FlipMesh();
         AlignForward();
         ShootBullet();
+    }
+
+    private void FlipMesh()
+    {
+        MeshRenderer meshRenderer;
+
+        meshRenderer = GetComponent<MeshRenderer>();
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void AlignForward()
@@ -24,7 +35,7 @@ public class MoveWeapon : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward*3, Color.red, 1);
+        //Debug.DrawRay(transform.position, transform.forward * 3, Color.red, 1);
 
     }
 
@@ -37,6 +48,15 @@ public class MoveWeapon : MonoBehaviour
         bulletRb.AddForce(transform.forward * bulletForce, ForceMode.Impulse);
 
         Destroy(gameObject, 2);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Environment"))
+        {
+            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.PlayOneShot(bounceClip);
+        }
     }
 
 }

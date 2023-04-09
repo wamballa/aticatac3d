@@ -36,6 +36,6 @@ public class GroundCheck : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         // Draw a line in the Editor to show whether we are touching the ground.
-        Debug.DrawLine(RaycastOrigin, RaycastOrigin + Vector3.down * RaycastDistance, isGrounded ? Color.white : Color.red);
+        //Debug.DrawLine(RaycastOrigin, RaycastOrigin + Vector3.down * RaycastDistance, isGrounded ? Color.white : Color.red);
     }
 }

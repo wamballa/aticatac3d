@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: -5173389119352646576}
   - component: {fileID: -8472891656020476420}
   - component: {fileID: 7440958178755787013}
-  - component: {fileID: 7440958178755787011}
   - component: {fileID: 3101067638318615379}
   - component: {fileID: 2480656408629238505}
   m_Layer: 7
@@ -294,22 +293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae617592da97cc47870a88ec703f81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7440958178755787011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440958178755787010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28304faef9572184ba25d682a363fe51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  radius: 0.5
-  height: 1
-  popPF: {fileID: 4312217602374033087, guid: 7b65b20faacdc0044a2ce1f4ca600076, type: 3}
 --- !u!114 &3101067638318615379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +308,6 @@ MonoBehaviour:
   sparklePF: {fileID: 4722669354876218344}
   firstChild: {fileID: 7747020234966180308}
   popPF: {fileID: 4312217602374033087, guid: 7b65b20faacdc0044a2ce1f4ca600076, type: 3}
-  deathSound: {fileID: 8300000, guid: 0ef02401223c71949a7a71f5a80c96fa, type: 3}
   canMove: 0
   materials:
   - {fileID: 2100000, guid: 56135f3039fa349459ab9bf8c245df83, type: 2}

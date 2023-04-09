@@ -8,8 +8,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent<string> onDropPickup;
     public UnityEvent<int> onEnemyDeath;
     public UnityEvent<int> onAddScore;
-
-
+    public UnityEvent<int> onPickup;
 }
 
 // EVENT MANAGER

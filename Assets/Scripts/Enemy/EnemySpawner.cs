@@ -64,14 +64,24 @@ public class EnemySpawner : MonoBehaviour
 
         if (timer <= 0f)
         {
+            int invalidSpawnCount = 0;
             do
             {
                 spawnPosition = GetRandomSpawnPosition();
-            } while (Vector3.Distance(spawnPosition, playerTransform.position) < minDistanceFromPlayer);
+                if (Vector3.Distance(spawnPosition, playerTransform.position) >= minDistanceFromPlayer)
+                {
+                    invalidSpawnCount = 0;
+                    break;
+                }
+                invalidSpawnCount++;
+            } while (invalidSpawnCount < 10);
 
-            GameObject spawnPrefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
-            Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
-            timer = spawnInterval;
+            if (invalidSpawnCount < 10)
+            {
+                GameObject spawnPrefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
+                Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
+                timer = spawnInterval;
+            }
         }
     }
 

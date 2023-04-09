@@ -28,8 +28,10 @@ public class TimerScript : MonoBehaviour
         int seconds = (int)(elapsedTime % 60);
 
         timerText.text = string.Format("{0:000}:{1:00}", minutes, seconds);
-        //timerText.text = seconds.ToString();
-        //Canvas.ForceUpdateCanvases();
+
+        PlayerPrefs.SetInt("Minutes", minutes);
+        PlayerPrefs.SetInt("Seconds", seconds);
+
     }
 
     public void ResetTimer()

@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     public GameObject popPF;
 
     [Header("Audio")]
-    public AudioClip deathSound;
-    private AudioSource audioSource;
 
     [Header("Movement")]
     public bool canMove = false;
@@ -30,66 +28,13 @@ public class EnemyController : MonoBehaviour
         PrepareForSpawn();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Weapon"))
-        {
-            HandleDeath(other.gameObject);
-        }
-    }
-
-    public IEnumerator ShowEnemy()
-    {
-        yield return new WaitForSeconds(2);
-        ActivateEnemy();
-    }
-
-    public bool GetCanMove()
-    {
-        return canMove;
-    }
-
     private void InitializeComponents()
     {
         eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
-        audioSource = GetComponent<AudioSource>();
         sphereCollider = GetComponent<SphereCollider>();
         animator = GetComponent<Animator>();
 
         if (sphereCollider == null) print("ERROR: no sphere collider found");
-    }
-
-    private void PrepareForSpawn()
-    {
-        canMove = false;
-
-        if (animator != null)
-        {
-            animator.enabled = false;
-        }
-
-        sphereCollider.enabled = false;
-    }
-
-    private void ActivateEnemy()
-    {
-        sphereCollider.enabled = true;
-        sparklePF.SetActive(false);
-        firstChild.SetActive(true);
-        animator.enabled = true;
-        canMove = true;
-    }
-
-    private void HandleDeath(GameObject other)
-    {
-        eventManager.onEnemyDeath.Invoke(10);
-
-
-        GameObject pop = Instantiate(popPF, transform.position, Quaternion.identity);
-        audioSource.PlayOneShot(deathSound);
-        Destroy(pop, 1f);
-        Destroy(gameObject);
-        Destroy(other);
     }
 
     protected void SetupMaterial()
@@ -105,4 +50,57 @@ public class EnemyController : MonoBehaviour
             m.material = targetMaterial;
         }
     }
+
+    private void PrepareForSpawn()
+    {
+        canMove = false;
+
+        if (animator != null)
+        {
+            animator.enabled = false;
+        }
+
+        sphereCollider.enabled = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            HandleDeath(other.gameObject);
+        }
+    }
+
+    public IEnumerator ShowEnemy()
+    {
+        yield return new WaitForSeconds(1);
+        ActivateEnemy();
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
+    private void ActivateEnemy()
+    {
+        sphereCollider.enabled = true;
+        sparklePF.SetActive(false);
+        firstChild.SetActive(true);
+        animator.enabled = true;
+        canMove = true;
+    }
+
+    private void HandleDeath(GameObject other)
+    {
+        eventManager.onEnemyDeath.Invoke(10);
+
+        GameObject pop = Instantiate(popPF, transform.position, Quaternion.identity);
+        Destroy(pop, 1f);
+        Destroy(other);
+
+        Destroy(gameObject);
+    }
+
+
 }

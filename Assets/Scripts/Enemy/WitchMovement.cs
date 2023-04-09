@@ -33,6 +33,12 @@ public class WitchMovement : MonoBehaviour
         enemyController = gameObject.GetComponent<EnemyController>();
         if (enemyController == null) print("ERROR: cannot find enemy controller");
         direction = UnityEngine.Random.Range(0, 2) * 2 - 1; // Generates either -1 or 1
+        direction = -1;
+        if (direction == -1)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); // flip the object
+        }
+
     }
 
     // Update is called once per frame
@@ -79,6 +85,7 @@ public class WitchMovement : MonoBehaviour
 
     private void FlipObject()
     {
+        print("Flip Movement");
         direction *= -1;
 
         isFlipped = !isFlipped;

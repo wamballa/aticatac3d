@@ -15,14 +15,36 @@ public class PlayerController : MonoBehaviour
     private int score;
 
     // Pickups
+    [Header("Pickups")]
     public GameObject[] pickUps;
     public float maxLength = 10f; // Set the maximum ray length in the Inspector
     public LayerMask layerMask; // Set the layer mask in the Inspector
 
-
+    [Header("Sounds")]
+    public AudioClip playerSpawnClip;
 
     private void Start()
     {
+        SpawnPlayer();
+    }
+
+    public void SpawnPlayer()
+    {
+        print("Spawn Player");
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null) print("ERROR: player has no audiosource");
+        audioSource.PlayOneShot(playerSpawnClip);
+        
+        Animator animUI = GameObject.Find("Scroll").GetComponent<Animator>();
+        animUI.Play("Scroll Animation", -1, 0);
+        Animator anim = gameObject.GetComponentInChildren<Animator>();
+        anim.Play("PlayerSpawn Animation", -1, 0);
+
+
+        //anim.StartPlayback();
+        //anim.SetBool("canPlay", true);
+        //anim.SetBool("canPlay", false);
+        //anim.SetBool("canPlay", true);
     }
 
     private void OnEnable()
@@ -38,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawLine(transform.position, transform.forward * 3, Color.green, 1);
+        //Debug.DrawLine(transform.position, transform.forward * 3, Color.green, 1);
     }
 
 
@@ -51,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
             eventManager.onDropPickup.AddListener(DropPickup);
             eventManager.onEnemyDeath.AddListener(EnemyDeath);
+            eventManager.onPickup.AddListener(Pickup);
         }
     }
 
@@ -58,7 +81,14 @@ public class PlayerController : MonoBehaviour
     {
         score += points;
         eventManager.onAddScore.Invoke(score);
-        //print("Player score = " + score);
+        PlayerPrefs.SetInt("Score", score);
+    }
+
+    private void Pickup(int points)
+    {
+        score += points;
+        eventManager.onAddScore.Invoke(score);
+        PlayerPrefs.SetInt("Score", score);
     }
 
     // Green Key
@@ -72,7 +102,7 @@ public class PlayerController : MonoBehaviour
     // Drop Pickup
     public void DropPickup(string pickupName)
     {
-        print("DropPick - "+pickupName);
+        print("DropPick - " + pickupName);
         foreach (GameObject go in pickUps)
         {
             if (go.CompareTag(pickupName))
@@ -100,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     private void InstantiatePickup(GameObject go)
     {
-        Vector3 newPos = transform.position + (transform.forward );
+        Vector3 newPos = transform.position + (transform.forward);
         //newPos.y = newPos.y + 0.1f;
         Instantiate(go, newPos, Quaternion.identity);
     }

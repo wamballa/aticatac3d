@@ -5,32 +5,43 @@ using UnityEngine;
 
 public class FireWeapon : MonoBehaviour
 {
+    [Header("Weapon")]
+    public GameObject weaponPrefab;
+    public float weaponSpawnHeight = 0.5f;
+    public GameObject carriedWeapon;
 
-    public GameObject carriedAxePF;
-    public GameObject weaponPF;
-    public Transform spawnTransform;
-    public GameObject cameraPF;
+    [Header("Audio")]
+    public AudioClip fireClip;
 
-    float fireInterval = 0.3f;
-    float fireTimer = 0;
-    bool canFire = true;
+    [Header("Fire Interval")]
+    public float fireInterval = 0.3f;
 
-    private bool canSeeCarriedAxe = true;
+    private Transform weaponSpawnTransform;
 
 
-    // Start is called before the first frame update
+    private float fireTimer = 0f;
+    private bool canFire = true;
+
+
     void Start()
     {
-        //GetWeaponSpawnTransform();
-        fireTimer = fireInterval;
+        weaponSpawnTransform = GameObject.Find("WeaponSpawn").transform;
+        if (weaponSpawnTransform == null)
+        {
+            Debug.LogError("Cannot find WeaponSpawn transform!");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateFireInterval();
         WeaponFire();
         ShowWeapon();
+    }
 
+    private void UpdateFireInterval()
+    {
         // Fire interval
         if (!canFire)
         {
@@ -43,41 +54,43 @@ public class FireWeapon : MonoBehaviour
         }
     }
 
-    private void ShowWeapon()
-    {
-        if (canFire)
-        {
-            carriedAxePF.SetActive(true);
-        }
-        else
-        {
-            carriedAxePF.SetActive(false);
-        }
-    }
-
-    void GetWeaponSpawnTransform()
-    {
-        foreach (Transform t in transform)
-        {
-            if (t.name == "WeaponSpawn")
-            {
-                spawnTransform = t;
-                break;
-            }
-
-        }
-        if (spawnTransform == null) print("ERROR: can't find weapon spawn");
-    }
-
     void WeaponFire()
     {
         if (!canFire) return;
+
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+
         if (Input.GetKeyDown(KeyCode.Space) || (Input.GetMouseButtonDown(0)))
         {
-            Instantiate(weaponPF, spawnTransform.position, transform.rotation);
+            audioSource.PlayOneShot(fireClip);
+
+            weaponSpawnTransform.position = new Vector3(
+                weaponSpawnTransform.position.x,
+                weaponSpawnHeight,
+                weaponSpawnTransform.position.z);
+            Instantiate(weaponPrefab, weaponSpawnTransform.position, transform.rotation);
+
             canFire = false;
         }
     }
 
+    private void ShowWeapon()
+    {
+        carriedWeapon.SetActive(canFire);
+    }
+
+    //void GetWeaponSpawnTransform()
+    //{
+    //    foreach (Transform t in transform)
+    //    {
+    //        if (t.name == "WeaponSpawn")
+    //        {
+    //            spawnTransform = t;
+    //            break;
+    //        }
+
+    //    }
+    //    if (spawnTransform == null) print("ERROR: can't find weapon spawn");
+    //}
 
 }

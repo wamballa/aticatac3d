@@ -10,18 +10,26 @@ public class SetObjectColour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>( true);
-
-        palette = new ZXPalette();
+        palette = ScriptableObject.CreateInstance<ZXPalette>();
         palette = ZXPalette.CreateInstance<ZXPalette>();
         targetColor = palette.GetZXColor();
 
-        foreach (MeshRenderer m in meshRenderers)
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>( true);
+        SpriteRenderer[] spriteRenders = GetComponentsInChildren<SpriteRenderer>(true);
+
+        if (meshRenderers.Length == 0)
         {
-            m.material.color = targetColor;
+            foreach (SpriteRenderer m in spriteRenders)
+            {
+                m.material.color = targetColor;
+            }
         }
-
+        else
+        {
+            foreach (MeshRenderer m in meshRenderers)
+            {
+                m.material.color = targetColor;
+            }
+        }
     }
-
 }

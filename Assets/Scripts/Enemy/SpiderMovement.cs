@@ -42,18 +42,18 @@ public class SpiderMovement : MonoBehaviour
 
         if (other.CompareTag("Environment"))
         {
-            print("Trigger entered with " + other.name + "by object called " + transform.name);
+            //print("Trigger entered with " + other.name + "by object called " + transform.name);
             FlipObject();
         }
 
         if (other.CompareTag("Player"))
         {
-            print("Hit Player");
+            //print("Hit Player");
         }
 
         if (other.CompareTag("Weapon"))
         {
-            print("Hit weapon");
+            //print("Hit weapon");
             GameObject pop = Instantiate(popPF, transform.position, Quaternion.identity);
             Destroy(pop, 1f);
             Destroy(gameObject);

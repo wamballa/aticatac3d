@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LockedDoorController : MonoBehaviour
+public class LockedDoorController : DoorBase
 {
     [Header("Locked Door variables")]
     private GameObject doorA;
@@ -15,6 +15,7 @@ public class LockedDoorController : MonoBehaviour
 
     private void Awake()
     {
+        base.Start();
         InitiateDoors();
     }
 
@@ -50,6 +51,8 @@ public class LockedDoorController : MonoBehaviour
 
         isDoorOpen = true;
 
+        PlayDoorSound();
+
         TeleportPlayer(playerController.GetComponent<Collider>(), door);
     }
 
@@ -60,5 +63,6 @@ public class LockedDoorController : MonoBehaviour
         else print("ERROR: no where to teleport to");
         other.transform.position = teleportLocation.position;
         other.transform.rotation = teleportLocation.rotation;
+        PlayTeleportClip();
     }
 }
