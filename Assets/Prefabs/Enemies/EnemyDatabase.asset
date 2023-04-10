@@ -14,25 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - name: Witch
-    health: 0
-    model: {fileID: 970942814026134711, guid: c82a11e1c89ecb84c9f1e0088b9fd50d, type: 3}
+    points: 1
+    model: {fileID: 7127524094595000823, guid: 5cf26c8d04e5f524ca033c507a5a7665, type: 3}
   - name: Spikey
-    health: 0
+    points: 2
     model: {fileID: 970942814026134711, guid: c82a11e1c89ecb84c9f1e0088b9fd50d, type: 3}
-  - name: Blob
-    health: 0
-    model: {fileID: 970942814026134711, guid: c82a11e1c89ecb84c9f1e0088b9fd50d, type: 3}
-  - name: Ghost
-    health: 0
+  - name: Spider
+    points: 3
+    model: {fileID: 4227873775419629573, guid: 27661968a818b4e4a8869194ec01789f, type: 3}
+  - name: Ghoul
+    points: 4
     model: {fileID: 872480320702891182, guid: 397949750f0297b42b9623657b081762, type: 3}
   - name: Pumpkin
-    health: 0
+    points: 5
     model: {fileID: 7781964618876419804, guid: 5e6af7e34e2db9646bec77608de9a5a9, type: 3}
   - name: Monk
-    health: 0
+    points: 6
     model: {fileID: 7633577186742888305, guid: ff1be13d474869342ad6f472635d1b51, type: 3}
   sparklePrefab: {fileID: 2794996815670837181, guid: 0cd60ec2fcddd794f9b7bfeab34e40fe, type: 3}
-  popPF: {fileID: 0}
-  materials: []
-  lookAtPlayer: {fileID: 0}
-  setObjectColour: {fileID: 0}
+  popPF: {fileID: 4312217602374033087, guid: 7b65b20faacdc0044a2ce1f4ca600076, type: 3}

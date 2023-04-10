@@ -19,8 +19,6 @@ public class Enemy_Controller : MonoBehaviour
     private GameObject enemyPrefab;
     EnemyType selectedEnemy = null;
 
-    //public int selectedEnemyIndex;
-
     void Start()
     {
         InitializeComponents();
@@ -28,18 +26,41 @@ public class Enemy_Controller : MonoBehaviour
         StartCoroutine(PrepareForSpawn());
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            HandleDeath(other.gameObject);
+        }
+    }
+
+    private void InitializeComponents()
+    {
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+        gameObject.AddComponent<LookAtPlayer>();
+        gameObject.AddComponent<AudioSource>();
+        gameObject.AddComponent<EnemyMovement>();
+        Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+        sphereCollider = gameObject.AddComponent<SphereCollider>();
+        sphereCollider.radius = 0.5f;
+        sphereCollider.isTrigger = true;
+        sphereCollider.enabled = false;
+
+    }
     private void FindSelectedEnemyInDatabase()
     {
         // Find the selected enemy type in the enemy database
-        
+        int i = 0;
         foreach (EnemyType enemyType in enemyDatabase.enemyTypes)
         {
             if (enemyType.name == enemySelector.selectedEnemyName)
             {
                 selectedEnemy = enemyType;
-                print("Selected Enemy = " + selectedEnemy.name);
+                //print("Selected Enemy = " + selectedEnemy.name + " " + i);
                 break;
             }
+            i++;
         }
 
         if (selectedEnemy == null)
@@ -51,14 +72,30 @@ public class Enemy_Controller : MonoBehaviour
 
     }
 
-    private void InitializeComponents()
+    private IEnumerator PrepareForSpawn()
     {
-        gameObject.AddComponent<LookAtPlayer>();
-        //gameObject.AddComponent<SetObjectColour>();
-        sphereCollider = gameObject.AddComponent<SphereCollider>();
-        sphereCollider.radius = 3f;
+        // Instantiate sparkle
+        GameObject go = Instantiate(enemyDatabase.sparklePrefab, transform.position, Quaternion.identity);
+        go.transform.parent = transform;
+        SetRandomColour();
+        canMove = false;
+
+        sphereCollider.enabled = false;
+
+        yield return new WaitForSeconds(3);
+
+        Destroy(go);
+
+        enemyPrefab = Instantiate(selectedEnemy.model, transform);
+        //enemyPrefab.transform.parent = transform;
+        SetRandomColour();
+        sphereCollider.enabled = true;
+        canMove = true;
+
 
     }
+
+
     private void SetRandomColour()
     {
         palette = ScriptableObject.CreateInstance<ZXPalette>();
@@ -71,35 +108,26 @@ public class Enemy_Controller : MonoBehaviour
             m.material.color = targetColor;
         }
     }
-    private IEnumerator PrepareForSpawn()
+
+
+    public bool GetCanMove()
     {
-        GameObject sparkle = Instantiate(enemyDatabase.sparklePrefab, transform);
-        SetRandomColour();
-        canMove = false;
-
-        //if (animator != null)
-        //{
-        //    animator.enabled = false;
-        //}
-
-        sphereCollider.enabled = false;
-
-        yield return new WaitForSeconds(3);
-        Destroy(sparkle);
-        enemyPrefab = Instantiate(selectedEnemy.model, transform.position, Quaternion.identity);
-        enemyPrefab.transform.parent = transform;
-        SetRandomColour();
-
-
+        return canMove;
     }
 
- 
-
-
-
-    // Update is called once per frame
-    void Update()
+    private void HandleDeath(GameObject other)
     {
-        
+        eventManager.onEnemyDeath.Invoke(selectedEnemy.points);
+
+        GameObject pop = Instantiate(
+            enemyDatabase.popPF, 
+            transform.position, 
+            Quaternion.identity);
+        Destroy(pop, 1f);
+        Destroy(other);
+
+        Destroy(gameObject);
     }
+
+
 }

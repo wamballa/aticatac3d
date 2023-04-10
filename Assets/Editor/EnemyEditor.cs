@@ -18,7 +18,11 @@ public class EnemySpawnerEditor : Editor
         }
 
         // Show a dropdown menu to select the enemy name
-        int selectedIndex = EditorGUILayout.Popup("Enemy Type", enemySelector.selectedEnemyIndex, enemyNames);
+        int selectedIndex = EditorGUILayout.Popup(
+            "Enemy Type", 
+            enemySelector.selectedEnemyIndex, 
+            enemyNames
+            );
         enemySelector.selectedEnemyIndex = selectedIndex;
     }
 }

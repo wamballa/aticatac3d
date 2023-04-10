@@ -10,11 +10,11 @@ public class EnemySelector : MonoBehaviour
 
     void OnEnable()
     {
-        selectedEnemyName = enemyDatabase.enemyTypes[0].name;
+        selectedEnemyName = enemyDatabase.enemyTypes[selectedEnemyIndex].name;
     }
 
     private void Start()
     {
-        print("Selected Enemy Index = " + selectedEnemyIndex);
+        //print("Selected Enemy Index = " + selectedEnemyIndex);
     }
 }

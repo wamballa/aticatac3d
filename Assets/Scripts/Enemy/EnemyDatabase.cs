@@ -9,10 +9,7 @@ public class EnemyDatabase : ScriptableObject
 
     public GameObject sparklePrefab;
     public GameObject popPF;
-    public List<Material> materials;
-
-    public LookAtPlayer lookAtPlayer;
-    public SetObjectColour setObjectColour;
+    //public List<Material> materials;
 
 }
 
@@ -20,6 +17,6 @@ public class EnemyDatabase : ScriptableObject
 public class EnemyType
 {
     public string name;
-    public int health;
+    public int points;
     public GameObject model;
 }

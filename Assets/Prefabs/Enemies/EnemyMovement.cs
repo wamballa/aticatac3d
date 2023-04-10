@@ -1,39 +1,36 @@
 using System;
 using UnityEngine;
 
-public class WitchMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     //public GameObject popPF;
 
-    int direction = 1;
-    float speed = 1;
-    float approachStep = 0.05f;
-    float approachSpeed = 1f;
-    Rigidbody rb;
-    Transform playerTransform;
+    private int direction = 1;
+    private float speed = 1;
+    private float approachStep = 0.05f;
+    private float approachSpeed = 1f;
+    private Rigidbody rb;
+    private Transform playerTransform;
 
     private bool isFlipped = false;
-
     private bool hasFoundPlayer = false;
-
     private bool canMove = false;
 
-    private EnemyController enemyController;
+    private Enemy_Controller enemyController;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Initialise();
+        InitialiseComponents();
     }
 
-    private void Initialise()
+    private void InitialiseComponents()
     {
         rb = transform.GetComponent<Rigidbody>();
-        enemyController = gameObject.GetComponent<EnemyController>();
+        enemyController = gameObject.GetComponent<Enemy_Controller>();
         if (enemyController == null) print("ERROR: cannot find enemy controller");
         direction = UnityEngine.Random.Range(0, 2) * 2 - 1; // Generates either -1 or 1
-        direction = -1;
+
         if (direction == -1)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); // flip the object
@@ -45,6 +42,7 @@ public class WitchMovement : MonoBehaviour
     void Update()
     {
         GetCanMove();
+
         if (hasFoundPlayer)
         {
             if (canMove)
@@ -55,10 +53,10 @@ public class WitchMovement : MonoBehaviour
         }
         else
         {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
             if (playerTransform != null) hasFoundPlayer = true; else print("ERROR: cannot find Player");
         }
-}
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -70,7 +68,7 @@ public class WitchMovement : MonoBehaviour
     }
 
 
-    public void SetCanMove( bool b)
+    public void SetCanMove(bool b)
     {
         canMove = b;
     }
@@ -85,19 +83,19 @@ public class WitchMovement : MonoBehaviour
 
     private void FlipObject()
     {
-        print("Flip Movement");
+        //print("Flip Movement");
         direction *= -1;
 
         isFlipped = !isFlipped;
 
-        if (isFlipped)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); // flip the object
-        }
-        else
-        {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // unflip the object
-        }
+        //if (isFlipped)
+        //{
+        //    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); // flip the object
+        //}
+        //else
+        //{
+        //    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // unflip the object
+        //}
     }
 
     private void GetCanMove()

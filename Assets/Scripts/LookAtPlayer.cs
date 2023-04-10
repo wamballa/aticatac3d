@@ -26,5 +26,7 @@ public class LookAtPlayer : MonoBehaviour
             if (player != null) hasFoundPlayer = true; else print("ERROR: cannot find Player");
         }
 
+        //Debug.DrawRay(transform.position, transform.forward * 2, Color.red, 0.5f);
+
     }
 }

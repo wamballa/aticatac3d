@@ -11,6 +11,14 @@ public class DrawConnectingLine : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(A.position, B.position);
+
+        Gizmos.DrawWireSphere(A.position, 0.5f);
+        Gizmos.DrawWireSphere(B.position, 0.5f);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(A.position, transform.forward);
+        Gizmos.DrawRay(B.position, transform.forward);
+
     }
 
 }
