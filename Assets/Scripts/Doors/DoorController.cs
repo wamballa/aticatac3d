@@ -63,11 +63,11 @@ public class DoorController : DoorBase
         if (door.name == "DoorA") teleportLocation = teleportLocationA;
         else if (door.name == "DoorB") teleportLocation = teleportLocationB;
         else print("ERROR: no where to teleport to");
-        Vector3 newPos = new Vector3(
-           teleportLocation.position.x,
-           -1.490116f,
-           teleportLocation.position.z);
-        teleportLocation.position = newPos;
+        //Vector3 newPos = new Vector3(
+        //   teleportLocation.position.x,
+        //   -1.490116f,
+        //   teleportLocation.position.z);
+        //teleportLocation.position = newPos;
         other.transform.position = teleportLocation.position;
         other.transform.rotation = teleportLocation.rotation;
         PlayTeleportClip();
