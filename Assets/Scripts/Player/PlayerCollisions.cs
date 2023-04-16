@@ -32,6 +32,40 @@ public class PlayerCollisions : MonoBehaviour
 
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.CompareTag("Environment"))
+    //    {
+    //        // Destroy all enemies so new ones can spawn
+    //        print("Player entered COLLISION " + collision.transform.name);
+    //        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    //        foreach (GameObject go in enemies) Destroy(go);
+    //        currentSpawnAreaTransform = collision.transform;//.GetChild(0);
+
+    //    }
+    //}
+
+    ////private void OnCollisionStay(Collision collision)
+    ////{
+    ////    if (collision.transform.CompareTag("Environment"))
+    ////    {
+    ////        print("@heelo");
+    ////    }
+    //}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        switch (collision.transform.tag)
+        {
+            case ("Enemy"):
+                print("@Player Collision " + collision.gameObject.name + " " + collision.transform.tag);
+                Destroy(collision.gameObject);
+                HandleCollisionWithEnemy();
+                break;
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,6 +80,7 @@ public class PlayerCollisions : MonoBehaviour
         if (other.CompareTag("SpawnArea"))
         {
             // Destroy all enemies so new ones can spawn
+            print("Player entered TRIGGER " + other.name);
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject go in enemies) Destroy(go);
             currentSpawnAreaTransform = other.transform;
@@ -73,14 +108,14 @@ public class PlayerCollisions : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Enemy"))
-        {
-            Destroy(other);
-            HandleHeath();
-        }
+        //if (other.CompareTag("Enemy"))
+        //{
+        //    Destroy(other);
+        //    HandleCollisionWithEnemy();
+        //}
     }
 
-    private void HandleHeath()
+    private void HandleCollisionWithEnemy()
     {
         gameObject.GetComponent<LivesController>().ReduceHealth();
     }

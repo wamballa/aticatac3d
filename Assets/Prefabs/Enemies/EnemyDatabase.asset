@@ -31,5 +31,8 @@ MonoBehaviour:
   - name: Monk
     points: 6
     model: {fileID: 7633577186742888305, guid: ff1be13d474869342ad6f472635d1b51, type: 3}
+  - name: Bat
+    points: 6
+    model: {fileID: 7608329694364152669, guid: 11bee880c03942f44b7cd8a4a2450e00, type: 3}
   sparklePrefab: {fileID: 2794996815670837181, guid: 0cd60ec2fcddd794f9b7bfeab34e40fe, type: 3}
   popPF: {fileID: 4312217602374033087, guid: 7b65b20faacdc0044a2ce1f4ca600076, type: 3}

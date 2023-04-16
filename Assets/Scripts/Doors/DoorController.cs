@@ -11,8 +11,11 @@ public class DoorController : DoorBase
     private Transform teleportLocation;
     private bool isLockedDoor;
     private float timerDelay = 2f;
+    private GameObject playerPF;
+    private bool isActive;
     //[HideInInspector] 
     public bool isDoorOpen = false;
+    private float searchRadius = 10f;
 
     private void Awake()
     {
@@ -21,23 +24,29 @@ public class DoorController : DoorBase
 
     void Start()
     {
+        playerPF = GameObject.FindGameObjectWithTag("Player");
         base.Start();
         StartCoroutine(HandleTimedDoors());
+
     }
 
-    IEnumerator HandleTimedDoors()
+    private void Update()
     {
-        yield return new WaitForSeconds(timerDelay);
-        ToggleDoor();
-        StartCoroutine(HandleTimedDoors());
+        ActivateIfPlayerNear();
     }
 
-    void ToggleDoor()
+    private void ActivateIfPlayerNear()
     {
-        isDoorOpen = !isDoorOpen;
-        SetDoorState(doorA, isDoorOpen);
-        SetDoorState(doorB, isDoorOpen);
-        PlayDoorSound();
+        float distance = Vector3.Distance( transform.position, playerPF.transform.position);
+        distance = Mathf.Abs(distance);
+        if (distance <= searchRadius)
+        {
+            isActive = true;
+        }
+        else
+        {
+            isActive = false;
+        }
     }
 
     void InitiateDoors()
@@ -50,7 +59,29 @@ public class DoorController : DoorBase
 
         SetDoorState(doorA, false);
         SetDoorState(doorB, false);
+
+        timerDelay += Random.Range(1,5);
+        //print(timerDelay);
     }
+
+ 
+
+    IEnumerator HandleTimedDoors()
+    {
+        yield return new WaitForSeconds(timerDelay);
+        if (isActive) ToggleDoor();
+        StartCoroutine(HandleTimedDoors());
+    }
+
+    void ToggleDoor()
+    {
+        isDoorOpen = !isDoorOpen;
+        SetDoorState(doorA, isDoorOpen);
+        SetDoorState(doorB, isDoorOpen);
+        PlayDoorSound();
+    }
+
+
 
     void SetDoorState(GameObject door, bool isOpen)
     {

@@ -41,11 +41,11 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetCanMove();
+        //GetCanMove();
 
         if (hasFoundPlayer)
         {
-            if (canMove)
+            if (GetCanMove())
             {
                 rb.velocity = new Vector3(speed * direction, 0, 0);
                 //MoveTowardsPlayer();
@@ -58,14 +58,31 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Environment"))
-        {
-            //print(gameObject.name + " hit wall");
-            FlipObject();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Environment"))
+    //    {
+    //        //print(gameObject.name + " hit wall");
+    //        FlipObject();
+    //    }
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.CompareTag("Environment"))
+    //    {
+    //        print(gameObject.name + " hit wall");
+    //        FlipObject();
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Environment"))
+    //    {
+    //        print(transform.name + "  exited TRIGGER on "+other.name);
+    //    }
+    //}
 
 
     public void SetCanMove(bool b)
@@ -81,7 +98,7 @@ public class EnemyMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, newPosition.z);
     }
 
-    private void FlipObject()
+    public void FlipObject()
     {
         //print("Flip Movement");
         direction *= -1;
@@ -98,9 +115,19 @@ public class EnemyMovement : MonoBehaviour
         //}
     }
 
-    private void GetCanMove()
+    private bool GetCanMove()
     {
-        canMove = enemyController.GetCanMove();
+        if (enemyController.GetCanMove())
+        {
+            if (transform.GetComponent<SphereCollider>() == null)
+            {
+                print("No SphereC in " + transform.name);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-
 }

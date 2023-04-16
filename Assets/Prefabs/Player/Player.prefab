@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1697672338408946709}
   - component: {fileID: 713737820263456598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Landing Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5413455996866842270}
   - component: {fileID: 7552977106360143037}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crouched Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5122720900357658646}
   - component: {fileID: 7697854419325957652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Step Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2502578236718244402}
   - component: {fileID: 3270526038306899937}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crouch End Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 298853320295402884}
   - component: {fileID: 3040075393265843337}
   - component: {fileID: 4315656696467389299}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6138591963127226523}
   - component: {fileID: 4004119772134730022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Jump Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6162133075759807711}
   - component: {fileID: 8086652481203974054}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +818,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 5015818937155716889}
   - component: {fileID: 5035387793564865187}
   - component: {fileID: 5027738871182265905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5009389288483670431}
   - component: {fileID: 4900712292378082043}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 4900831802964351277}
   - component: {fileID: 4970632048451986734}
   - component: {fileID: 1061905519841998151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: First Person Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1031,7 +1031,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1015
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1165,7 +1165,8 @@ GameObject:
   - component: {fileID: 1259021081202433724}
   - component: {fileID: 2302212088771643190}
   - component: {fileID: -3952589880550683320}
-  m_Layer: 0
+  - component: {fileID: 3846956869238534878}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1189,8 +1190,9 @@ Transform:
   - {fileID: 5009389288483670431}
   - {fileID: 5013658885079768805}
   - {fileID: 6162133075759807711}
+  - {fileID: 2347961229117818512}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &4932093396141075945
 CapsuleCollider:
@@ -1427,6 +1429,18 @@ MonoBehaviour:
   tombStonePF: {fileID: 3686390818897751681, guid: b366631871897d04ea66fa2169ec7f7a, type: 3}
   livesPrefab: {fileID: 4862818581498035921, guid: 3d7073318c46ab24f9a0c7094909e558, type: 3}
   livesPanelPrefab: {fileID: 0}
+--- !u!114 &3846956869238534878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013162968469021691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34bda5c597d974243bfcf551fcdd5d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5013658884073983660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5013658884073983659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1469,7 +1483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5013658884267891002}
   - component: {fileID: 5013658884267891005}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crouch Start Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1597,7 +1611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5013658885079768805}
   - component: {fileID: 5013658885079768804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: First Person Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1689,7 @@ GameObject:
   - component: {fileID: 2259615342645911918}
   - component: {fileID: 4982408071283045573}
   - component: {fileID: 8027313960461342423}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpawnScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1778,7 +1792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4129777376953604765}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crouch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1813,7 +1827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 104249619355359477}
   - component: {fileID: 4768637446210148217}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Running Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1931,6 +1945,90 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &7090666908749356190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2347961229117818512}
+  - component: {fileID: 7320392739451472361}
+  m_Layer: 10
+  m_Name: PlayerMiniMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2347961229117818512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090666908749356190}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5015579192687638611}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!212 &7320392739451472361
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090666908749356190}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: a0e69fc5855f901479c661060210ca84, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.72}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1001 &2179392870783063614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1939,9 +2037,17 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 5015862012848971699}
     m_Modifications:
+    - target: {fileID: 2335922131951162365, guid: d1018ef5ec4dbf644918b501c8570d6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3218865490866222244, guid: d1018ef5ec4dbf644918b501c8570d6c, type: 3}
       propertyPath: m_Name
       value: AxeCarry
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218865490866222244, guid: d1018ef5ec4dbf644918b501c8570d6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3218865490866222246, guid: d1018ef5ec4dbf644918b501c8570d6c, type: 3}
       propertyPath: m_RootOrder
@@ -2002,6 +2108,10 @@ PrefabInstance:
     - target: {fileID: 3218865490866222246, guid: d1018ef5ec4dbf644918b501c8570d6c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766402450544880420, guid: d1018ef5ec4dbf644918b501c8570d6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

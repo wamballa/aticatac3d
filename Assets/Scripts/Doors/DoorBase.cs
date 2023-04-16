@@ -20,7 +20,7 @@ public class DoorBase : MonoBehaviour
     {
         foreach(Transform t in parent)
         {
-            print(t.name);
+            //print(t.name);
             if (t.CompareTag("Teleport"))
             {
                 t.gameObject.SetActive(false);

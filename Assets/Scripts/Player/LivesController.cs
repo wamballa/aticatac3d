@@ -67,7 +67,7 @@ public class LivesController : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth--;
-            //print("Health = " + currentHealth);
+            print("Health = " + currentHealth);
             UpdateHealthUI();
         }
         else

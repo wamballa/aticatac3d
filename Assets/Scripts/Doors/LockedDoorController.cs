@@ -30,7 +30,7 @@ public class LockedDoorController : DoorBase
     public void AttemptToUnlockDoor(Collider other, GameObject door)
     {
         PlayerController playerController = other.GetComponent<PlayerController>();
-        print("DOOR " + door.name);
+        //print("DOOR " + door.name);
         if (transform.CompareTag("GreenDoor") && playerController.GetHasGreenKey())
         {
             UnlockDoors(playerController, door);

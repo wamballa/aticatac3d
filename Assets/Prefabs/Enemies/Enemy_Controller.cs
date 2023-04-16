@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Enemy_Controller : MonoBehaviour
 {
-    private EventManager eventManager;
     public EnemyDatabase enemyDatabase;
-    public EnemySelector enemySelector;
+    public GameObject miniMapMarker;
+    private string selectedEnemyName;
+
+    private EventManager eventManager;
+    //private EnemySelector enemySelector;
     //public EnemyType enemyType;
     //public string selectedEnemyName;
 
@@ -17,7 +20,7 @@ public class Enemy_Controller : MonoBehaviour
     private Color targetColor;
 
     private GameObject enemyPrefab;
-    EnemyType selectedEnemy = null;
+    private EnemyType selectedEnemy = null;
 
     void Start()
     {
@@ -40,36 +43,36 @@ public class Enemy_Controller : MonoBehaviour
         gameObject.AddComponent<LookAtPlayer>();
         gameObject.AddComponent<AudioSource>();
         gameObject.AddComponent<EnemyMovement>();
+        gameObject.AddComponent<EnemyCollisions>();
+        GameObject marker = Instantiate(miniMapMarker);
+        marker.transform.parent = transform;
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         rb.useGravity = false;
         sphereCollider = gameObject.AddComponent<SphereCollider>();
+        if (sphereCollider == null) print("ERROR: no sphere collider created");
         sphereCollider.radius = 0.5f;
-        sphereCollider.isTrigger = true;
+        sphereCollider.isTrigger = false;
         sphereCollider.enabled = false;
-
+        //enemySelector = gameObject.GetComponent<EnemySelector>();
     }
     private void FindSelectedEnemyInDatabase()
     {
+        selectedEnemyName = gameObject.name;
         // Find the selected enemy type in the enemy database
-        int i = 0;
         foreach (EnemyType enemyType in enemyDatabase.enemyTypes)
         {
-            if (enemyType.name == enemySelector.selectedEnemyName)
+            if (enemyType.name == selectedEnemyName)
             {
                 selectedEnemy = enemyType;
-                //print("Selected Enemy = " + selectedEnemy.name + " " + i);
                 break;
             }
-            i++;
         }
 
         if (selectedEnemy == null)
         {
-            Debug.LogError("Selected enemy not found in database!");
+            Debug.LogError("Selected enemy not found in database! "+selectedEnemyName);
             return;
         }
-
-
     }
 
     private IEnumerator PrepareForSpawn()
@@ -115,7 +118,7 @@ public class Enemy_Controller : MonoBehaviour
         return canMove;
     }
 
-    private void HandleDeath(GameObject other)
+    public void HandleDeath(GameObject other)
     {
         eventManager.onEnemyDeath.Invoke(selectedEnemy.points);
 

@@ -6,11 +6,11 @@ public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy details")]
     public GameObject[] prefabsToSpawn;
-    public GameObject[] spawnAreas;
+    //public GameObject[] spawnAreas;
     public Transform spawnAreaTransform;
     public int maxEnemies = 1;
     public float spawnInterval = 1f;
-    public float minDistanceFromPlayer = 3f;
+    public float minDistanceFromPlayer = 2f;
     public float spawnHeight = -1f;
 
     private Vector3 spawnAreaSize;
@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
         currentEnemies = 0;
         spawnAreaSize = spawnAreaTransform.localScale;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        spawnAreas = GameObject.FindGameObjectsWithTag("SpawnArea");
+        //spawnAreas = GameObject.FindGameObjectsWithTag("SpawnArea");
     }
 
     void UpdateSpawnAreaTransform()
@@ -78,8 +78,10 @@ public class EnemySpawner : MonoBehaviour
 
             if (invalidSpawnCount < 10)
             {
-                GameObject spawnPrefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
-                Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
+                int random = Random.Range(0, prefabsToSpawn.Length);
+                GameObject randomPF = prefabsToSpawn[random];
+                GameObject spawnPrefab = Instantiate(randomPF, spawnPosition, Quaternion.identity);
+                spawnPrefab.name = randomPF.name;
                 timer = spawnInterval;
             }
         }
@@ -87,10 +89,12 @@ public class EnemySpawner : MonoBehaviour
 
     Vector3 GetRandomSpawnPosition()
     {
+        //print("Spawnarea size = " + spawnAreaSize);
+        float offset = 0.1f;
         Vector3 spawnPos = spawnAreaTransform.position + new Vector3(
-            Random.Range((-spawnAreaSize.x / 2f)+1, (spawnAreaSize.x / 2f)-1),
+            Random.Range((-spawnAreaSize.x / 2f)+ offset, (spawnAreaSize.x / 2f)- offset),
             spawnHeight,
-            Random.Range((-spawnAreaSize.z / 2f)+1, (spawnAreaSize.z / 2f)-1)
+            Random.Range((-spawnAreaSize.z / 2f)+ offset, (spawnAreaSize.z / 2f)- offset)
         );
         spawnPos.y = spawnHeight;
         return spawnPos;
