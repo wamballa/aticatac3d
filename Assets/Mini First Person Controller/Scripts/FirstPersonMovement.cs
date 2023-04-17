@@ -11,6 +11,9 @@ public class FirstPersonMovement : MonoBehaviour
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
 
+    private bool canMove = false;
+
+
     new Rigidbody rigidbody;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
@@ -28,6 +31,8 @@ public class FirstPersonMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canMove) return;
+
         // Update IsRunning from input.
         IsRunning = canRun && Input.GetKey(runningKey);
 
@@ -44,6 +49,15 @@ public class FirstPersonMovement : MonoBehaviour
         // Apply movement.
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
 
+    }
+
+    public void CanMoveTrue()
+    {
+        canMove = true;
+    }
+    public void CanMoveFalse()
+    {
+        canMove = false;
     }
 
 

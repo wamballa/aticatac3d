@@ -45,6 +45,7 @@ public class Enemy_Controller : MonoBehaviour
         gameObject.AddComponent<EnemyMovement>();
         gameObject.AddComponent<EnemyCollisions>();
         GameObject marker = Instantiate(miniMapMarker);
+        marker.transform.position = transform.position;
         marker.transform.parent = transform;
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         rb.useGravity = false;
