@@ -20398,8 +20398,9 @@ GameObject:
   - component: {fileID: 1214467774}
   - component: {fileID: 1214467773}
   - component: {fileID: 1214467772}
+  - component: {fileID: 1214467775}
   m_Layer: 0
-  m_Name: Background
+  m_Name: MiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20477,6 +20478,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214467770}
   m_CullTransparentMesh: 1
+--- !u!95 &1214467775
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214467770}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf114db87adab5542b90d2016a4a12a6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1215880338
 GameObject:
   m_ObjectHideFlags: 0
@@ -24899,7 +24920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25081,11 +25102,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 375a6ff0badef264a9c7c12a1bbae47e, type: 2}
   m_TargetDisplay: 0
@@ -25320,8 +25341,9 @@ MonoBehaviour:
   - {fileID: 3178508978705932620, guid: 27084fe72e9d4304bab097317a7ec770, type: 3}
   - {fileID: 3178508978705932620, guid: 89bf69dc3df036c4fb76e29978470472, type: 3}
   - {fileID: 3178508978705932620, guid: ee983dee91b80ed4aa180b59ce218bdc, type: 3}
+  - {fileID: 3178508978705932620, guid: 174355dc41ab55148b65dee593b08d4a, type: 3}
   spawnAreaTransform: {fileID: 387697268}
-  maxEnemies: 10
+  maxEnemies: 5
   spawnInterval: 1
   minDistanceFromPlayer: 3
   spawnHeight: 0.3

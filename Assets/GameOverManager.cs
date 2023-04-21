@@ -17,7 +17,7 @@ public class GameOverManager : MonoBehaviour
     int seconds=0;
     int percentComplete = 0;
 
-    float timerDuration = 3f;
+    float timerDuration = 10f;
     float timer = 0;
 
 
@@ -35,21 +35,24 @@ public class GameOverManager : MonoBehaviour
     {
         timer = timer - Time.deltaTime;
         if (timer <= 0) SceneManager.LoadScene(0);
+
+        if (Input.anyKey) SceneManager.LoadScene(0);
     }
 
     private void SetValues()
     {
         scrollTimeText.text = timeText.text = string.Format("{0:000}:{1:00}", minutes, seconds);
-        scrollscoreText.text = scoreText.text = score.ToString("D6");
-        percentageCompleteText.text = "00";
+        scrollscoreText.text = score.ToString("D6");
+        scoreText.text = score.ToString("D6");
+        percentageCompleteText.text = "12";
     }
 
     private void GetValues()
     {
         timer = timerDuration;
         score = PlayerPrefs.GetInt("Score");
-        minutes = PlayerPrefs.GetInt("Score");
-        seconds = PlayerPrefs.GetInt("Score");
+        minutes = PlayerPrefs.GetInt("Minutes");
+        seconds = PlayerPrefs.GetInt("Seconds");
         score = PlayerPrefs.GetInt("PercentComplete");
     }
 

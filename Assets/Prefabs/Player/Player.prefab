@@ -1352,7 +1352,7 @@ MonoBehaviour:
   weaponSpawnHeight: 0.5
   carriedWeapon: {fileID: 3644950697357812378}
   fireClip: {fileID: 8300000, guid: 43d27aed7f52fdc4c8d530586e2ec16d, type: 3}
-  fireInterval: 0.3
+  fireInterval: 0.1
 --- !u!114 &3671159518353226921
 MonoBehaviour:
   m_ObjectHideFlags: 0

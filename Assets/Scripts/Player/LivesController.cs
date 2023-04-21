@@ -111,7 +111,7 @@ public class LivesController : MonoBehaviour
             UpdateLivesUI();
             Instantiate(tombStonePF, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
             gameObject.GetComponent<PlayerController>().SpawnPlayer();
-            print("Lives =  " + lives);
+            print("SCore =  " + PlayerPrefs.GetInt("Score"));
         }
         else
         {

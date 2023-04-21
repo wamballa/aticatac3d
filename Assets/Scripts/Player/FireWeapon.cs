@@ -14,7 +14,7 @@ public class FireWeapon : MonoBehaviour
     public AudioClip fireClip;
 
     [Header("Fire Interval")]
-    public float fireInterval = 0.3f;
+    public float fireInterval = 0.1f;
 
     private Transform weaponSpawnTransform;
 

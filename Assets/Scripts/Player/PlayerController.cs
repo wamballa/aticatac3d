@@ -38,8 +38,12 @@ public class PlayerController : MonoBehaviour
         Animator animUI = GameObject.Find("Scroll").GetComponent<Animator>();
         animUI.Play("Scroll Animation", -1, 0);
         Animator anim = gameObject.GetComponentInChildren<Animator>();
-        anim.Play("PlayerSpawn Animation", -1, 0);
 
+        Animator animMiniMap = GameObject.Find("MiniMap").GetComponent<Animator>();
+        animMiniMap.Play("MiniMap Animation", -1, 0);
+        Animator animatorMiniMap = gameObject.GetComponentInChildren<Animator>();
+
+        anim.Play("PlayerSpawn Animation", -1, 0);
 
         //anim.StartPlayback();
         //anim.SetBool("canPlay", true);
