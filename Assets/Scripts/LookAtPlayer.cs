@@ -18,7 +18,12 @@ public class LookAtPlayer : MonoBehaviour
     {
         if (hasFoundPlayer)
         {
-            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+            //transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+            transform.LookAt(new Vector3(
+                player.position.x, 
+                0, 
+                player.position.z
+                ));
         }
         else
         {

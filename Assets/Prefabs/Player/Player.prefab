@@ -1031,7 +1031,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1015
+    m_Bits: 7159
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1383,6 +1383,9 @@ MonoBehaviour:
   pickUps:
   - {fileID: 6160324524243993795, guid: 82eb8be68c984a64797dc79efc3befd2, type: 3}
   - {fileID: 6160324524243993795, guid: ed312d5a6575bec47b3ca84b1a418f08, type: 3}
+  - {fileID: 3553830173844758042, guid: 7254a4b2662b6274aa29a1342ce8a71b, type: 3}
+  - {fileID: 6160324524243993795, guid: f3e126e33213c9842bde9bf3f2e917c7, type: 3}
+  - {fileID: 2685176605942169243, guid: 0f3816e17e2f4d545b6e89226df36ca3, type: 3}
   maxLength: 10
   layerMask:
     serializedVersion: 2

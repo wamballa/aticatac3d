@@ -32,34 +32,15 @@ public class PlayerCollisions : MonoBehaviour
 
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.transform.CompareTag("Environment"))
-    //    {
-    //        // Destroy all enemies so new ones can spawn
-    //        print("Player entered COLLISION " + collision.transform.name);
-    //        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-    //        foreach (GameObject go in enemies) Destroy(go);
-    //        currentSpawnAreaTransform = collision.transform;//.GetChild(0);
-
-    //    }
-    //}
-
-    ////private void OnCollisionStay(Collision collision)
-    ////{
-    ////    if (collision.transform.CompareTag("Environment"))
-    ////    {
-    ////        print("@heelo");
-    ////    }
-    //}
-
     private void OnCollisionEnter(Collision collision)
     {
 
         switch (collision.transform.tag)
         {
             case ("Enemy"):
-                print("@Player Collision " + collision.gameObject.name + " " + collision.transform.tag);
+            case ("Dracula"):
+            case ("Mummy"):
+                //print("@Player Collision " + collision.gameObject.name + " " + collision.transform.tag);
                 Destroy(collision.gameObject);
                 HandleCollisionWithEnemy();
                 break;
@@ -69,51 +50,53 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PickUp"))
+        switch (other.tag)
         {
-            print("Can picked up "+other.name);
-            Destroy(other.gameObject);
-            audioSource.PlayOneShot(pickupClip);
-            eventManager.onPickup.Invoke(100);
+            case "PickUp":
+                HandleItemPickup(other);
+                break;
+            case "SpawnArea":
+                HandleSpawnAreaEnter(other);
+                break;
+            case "GreenKey":
+            case "CyanKey":
+            case "RedKey":
+            case "Crucifix":
+            case "Leaf":
+                HandlePickup(other);
+                break;
         }
-
-        if (other.CompareTag("SpawnArea"))
-        {
-            // Destroy all enemies so new ones can spawn
-            print("Player entered TRIGGER " + other.name);
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject go in enemies) Destroy(go);
-            currentSpawnAreaTransform = other.transform;
-        }
-
-
-        if (other.CompareTag("GreenKey"))
-        {
-            transform.GetComponent<PlayerController>().SetHasGreenKey();
-            if (uiManager.CanPickUp())
-            {
-                uiManager.AddItem("GreenKey");
-                Destroy(other.gameObject);
-            }
-        }
-
-
-        if (other.CompareTag("CyanKey"))
-        {
-            transform.GetComponent<PlayerController>().SetHasCyanKey();
-            if (uiManager.CanPickUp())
-            {
-                uiManager.AddItem("CyanKey");
-                Destroy(other.gameObject);
-            }
-        }
-
-        //if (other.CompareTag("Enemy"))
-        //{
-        //    Destroy(other);
-        //    HandleCollisionWithEnemy();
-        //}
     }
+
+    private void HandleItemPickup(Collider other)
+    {
+        print("Can picked up " + other.name);
+        Destroy(other.gameObject);
+        audioSource.PlayOneShot(pickupClip);
+        eventManager.onPickup.Invoke(100);
+    }
+
+    private void HandleSpawnAreaEnter(Collider other)
+    {
+        print("Player entered TRIGGER " + other.name);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject go in enemies) Destroy(go);
+        currentSpawnAreaTransform = other.transform;
+    }
+
+    private void HandlePickup(Collider other)
+    {
+        string pickupTag = other.tag;
+        transform.GetComponent<PlayerController>().SetHasPickup(pickupTag);
+
+        if (uiManager.CanPickUp())
+        {
+            uiManager.AddItem(pickupTag);
+            Destroy(other.gameObject);
+        }
+    }
+
+
 
     private void HandleCollisionWithEnemy()
     {

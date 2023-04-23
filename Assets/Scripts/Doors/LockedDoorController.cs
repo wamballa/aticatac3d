@@ -31,11 +31,11 @@ public class LockedDoorController : DoorBase
     {
         PlayerController playerController = other.GetComponent<PlayerController>();
         //print("DOOR " + door.name);
-        if (transform.CompareTag("GreenDoor") && playerController.GetHasGreenKey())
+        if (transform.CompareTag("GreenDoor") && playerController.GetHasPickup("GreenKey"))
         {
             UnlockDoors(playerController, door);
         }
-        else if (transform.CompareTag("CyanDoor") && playerController.GetHasCyanKey())
+        else if (transform.CompareTag("CyanDoor") && playerController.GetHasPickup("CyanKey"))
         {
             UnlockDoors(playerController, door);
         }

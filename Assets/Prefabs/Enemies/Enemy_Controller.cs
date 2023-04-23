@@ -95,8 +95,6 @@ public class Enemy_Controller : MonoBehaviour
         SetRandomColour();
         sphereCollider.enabled = true;
         canMove = true;
-
-
     }
 
 
@@ -132,6 +130,4 @@ public class Enemy_Controller : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-
 }

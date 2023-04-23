@@ -40,7 +40,8 @@ public class EnemyCollisions : MonoBehaviour
                 break;
             case "Weapon":
                 //print("Enemy hit weapon");
-                enemyController.HandleDeath(collision.gameObject);
+                if (transform.CompareTag("Enemy")) enemyController.HandleDeath(collision.gameObject);
+                if (transform.CompareTag("Dracula")) Destroy(collision.gameObject);
                 break;
         }
 

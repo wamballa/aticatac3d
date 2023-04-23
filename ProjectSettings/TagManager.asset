@@ -16,6 +16,10 @@ TagManager:
   - RedKey
   - Teleport
   - PickUp
+  - Dracula
+  - Crucifix
+  - Leaf
+  - Mummy
   layers:
   - Default
   - TransparentFX
@@ -28,10 +32,10 @@ TagManager:
   - Player
   - WeaponLayer
   - MiniMap
-  - 
-  - 
-  - 
-  - 
+  - Dracula
+  - Pickup
+  - Floor
+  - Mummy
   - 
   - 
   - 

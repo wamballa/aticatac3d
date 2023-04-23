@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    // Key states
+    // Pickup states
     private bool hasGreenKey;
     private bool hasCyanKey;
+    private bool hasCrucifix;
+    private bool hasRedKey;
+    private bool hasLeaf;
 
     // Event listener
     private EventManager eventManager;
@@ -95,13 +98,48 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("Score", score);
     }
 
-    // Green Key
-    public void SetHasGreenKey() => hasGreenKey = true;
-    public bool GetHasGreenKey() => hasGreenKey;
+    public void SetHasPickup(string keyType)
+    {
+        switch (keyType)
+        {
+            case "GreenKey":
+                hasGreenKey = true;
+                break;
+            case "CyanKey":
+                hasCyanKey = true;
+                break;
+            case "RedKey":
+                hasRedKey = true;
+                break;
+            case "Crucifix":
+                hasCrucifix = true;
+                break;
+            case "Leaf":
+                hasLeaf = true;
+                break;
+        }
+    }
 
-    // Cyan Key
-    public void SetHasCyanKey() => hasCyanKey = true;
-    public bool GetHasCyanKey() => hasCyanKey;
+    public bool GetHasPickup(string keyType)
+    {
+        switch (keyType)
+        {
+            case "GreenKey":
+                return hasGreenKey;
+            case "CyanKey":
+                return hasCyanKey;
+            case "RedKey":
+                return hasRedKey;
+            case "Crucifix":
+                return hasCrucifix;
+            case "Leaf":
+                return hasLeaf;
+            default:
+                return false;
+        }
+    }
+
+
 
     // Drop Pickup
     public void DropPickup(string pickupName)
@@ -113,13 +151,13 @@ public class PlayerController : MonoBehaviour
             {
                 print("DropPick FOUND - " + go.name);
 
-                UpdateKeyState(pickupName, false);
+                UpdatePickupState(pickupName, false);
                 InstantiatePickup(go);
             }
         }
     }
 
-    private void UpdateKeyState(string pickupName, bool state)
+    private void UpdatePickupState(string pickupName, bool state)
     {
         switch (pickupName)
         {
@@ -128,6 +166,15 @@ public class PlayerController : MonoBehaviour
                 break;
             case "GreenKey":
                 hasGreenKey = state;
+                break;
+            case "RedKey":
+                hasRedKey = state;
+                break;
+            case "Crucifix":
+                hasCrucifix = state;
+                break;
+            case "Leaf":
+                hasLeaf = state;
                 break;
         }
     }

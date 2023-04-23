@@ -16,7 +16,9 @@ public class UImanager : MonoBehaviour
     public GameObject greenKeyImage;
     public GameObject redKeyImage;
     public GameObject blueKeyImage;
-    public GameObject blankKeyImage;
+    public GameObject crucifixImage;
+    public GameObject leafImage;
+    public GameObject blankImage;
     public Transform keyPanel;
     [Header("Lives panel")]
     public GameObject livesPanel;
@@ -60,6 +62,15 @@ public class UImanager : MonoBehaviour
             case "GreenKey":
                 InsertAt(blankPosition, greenKeyImage);
                 break;
+            case "RedKey":
+                InsertAt(blankPosition, redKeyImage);
+                break;
+            case "Crucifix":
+                InsertAt(blankPosition, crucifixImage);
+                break;
+            case "Leaf":
+                InsertAt(blankPosition, leafImage);
+                break;
             default:
                 print("ERROR: unknown item called - " + item);
                 break;
@@ -70,6 +81,7 @@ public class UImanager : MonoBehaviour
     public void RemoveItem(int i)
     {
         if (items[i] == null) return;
+        print(items[i].tag);
         eventManager.onDropPickup.Invoke(items[i].tag);
         items[i] = null;
         RefreshPanel();
@@ -101,7 +113,7 @@ public class UImanager : MonoBehaviour
         RemoveAllChildren();
         foreach (GameObject go in items)
         {
-            Instantiate(go == null ? blankKeyImage : go, keyPanel);
+            Instantiate(go == null ? blankImage : go, keyPanel);
         }
     }
 

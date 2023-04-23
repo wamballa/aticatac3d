@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public int maxEnemies = 1;
     public float spawnInterval = 1f;
     public float minDistanceFromPlayer = 2f;
-    public float spawnHeight = -1f;
+    public float spawnHeight = 0;//-1f;
 
     private Vector3 spawnAreaSize;
     private Transform playerTransform;
